@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\Saudacao;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SiteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,32 +15,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/servico/{id}', function (int $id) {
-    $servicos = [
-        1 => [
-            'nome' => 'Lavagem de rouba',
-            'descricao' => 'lore ipsum',
-        ],
-        2 => [
-            'nome' => 'Lavagem de Coberta',
-            'descricao' => 'lore ipsum',
-        ],
-        3 => [
-            'nome' => 'Lavagem de pelúcia',
-            'descricao' => 'lore ipsum',
-        ]
-    ];
-
-    echo $servicos[$id]['nome'];
-    echo "<br>";
-    echo $servicos[$id]['descricao'];
-});
+Route::get('/', [SiteController::class, 'index']);
+Route::get('/sobre', [SiteController::class, 'sobre']);
+Route::get('/contato', [SiteController::class, 'contato']);
+Route::get('/servicos', [SiteController::class, 'servicos']);
+Route::get('/servico/{id}', [SiteController::class, 'servico']);
 
 // Com interrogação o parâmetro fica opcional, não causando erro se não for passado
-Route::get('/saudacao/{nome?}', function (string $nome = null) {
-    echo "Olá $nome";
-});
+Route::get('/saudacao/{nome?}', Saudacao::class);
