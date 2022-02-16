@@ -3,6 +3,7 @@
 use App\Http\Controllers\Saudacao;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SiteController;
+use App\Http\Controllers\ClientController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,3 +24,6 @@ Route::get('/servico/{id}', [SiteController::class, 'servico']);
 
 // Com interrogação o parâmetro fica opcional, não causando erro se não for passado
 Route::get('/saudacao/{nome?}', Saudacao::class);
+
+Route::get('/clients', [ClientController::class, 'index'])->name('clients.index');
+Route::get('/clients/{id}', [ClientController::class, 'show'])->name('clients.show');
